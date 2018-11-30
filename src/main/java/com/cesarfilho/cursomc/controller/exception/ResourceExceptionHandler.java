@@ -10,14 +10,11 @@ import com.cesarfilho.cursomc.services.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
-	
-	
-	 
-	    @ExceptionHandler(ObjectNotFoundException.class)
-	    protected ResponseEntity<Object> objectNotFound(
-	      ObjectNotFoundException ex, WebRequest request) {
-	        String bodyOfResponse = "This should be application specific";
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(bodyOfResponse);
-	    }
-	
+
+	@ExceptionHandler(ObjectNotFoundException.class)
+	protected ResponseEntity<Object> objectNotFound(ObjectNotFoundException e, WebRequest request) {
+
+		StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+	}
 }
