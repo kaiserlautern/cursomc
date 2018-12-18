@@ -23,8 +23,9 @@ public class Estado implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy="estado")	
+	@JsonIgnore
 	private List<Cidade> cidades = new ArrayList<>();
 	
 	public Estado() {}
